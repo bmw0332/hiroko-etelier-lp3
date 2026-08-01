@@ -59,15 +59,18 @@ a{color:inherit;text-decoration:none;}
 .section{padding:96px 0;position:relative;}
 
 /* ---------- Typography ---------- */
-/* 見出しの「泣き別れ」防止 */
+/* 見出しの「泣き別れ」防止
+   デスクトップ：各行(.ln)を塊にして意図した位置だけで改行
+   モバイル：幅が足りないので通常折り返しに戻すが、keep-allで
+            句読点1文字だけがこぼれる不自然な改行は抑制 */
 .hero-title,.sec-title,.gift-title,.final-title{
-  word-break:keep-all;         /* 文節の途中で改行しない（記号や句読点で不自然に割らない）*/
-  overflow-wrap:anywhere;      /* それでも収まらない長い行だけは折り返す */
-  text-wrap:balance;           /* 対応ブラウザは各行の文字数を均等化 */
+  word-break:keep-all;
+  overflow-wrap:break-word;
 }
 .hero-title .ln,.sec-title .ln,.gift-title .ln,.final-title .ln{
-  display:inline;
+  display:inline-block;
   word-break:keep-all;
+  max-width:100%;
 }
 .sec-title{
   font-family:var(--font-serif);
@@ -701,6 +704,11 @@ a{color:inherit;text-decoration:none;}
 @media (max-width:640px){
   .section{padding:64px 0;}
   .container{padding:0 18px;}
+  /* モバイルは幅が狭いため、行の塊を無理に保持せず自然に折り返す
+     （keep-allは有効なので「、」1文字だけの泣き別れは起きにくい）*/
+  .hero-title .ln,.sec-title .ln,.gift-title .ln,.final-title .ln{
+    display:inline;
+  }
   .checklist,.rec-list{grid-template-columns:1fr;}
   .imagine-grid{grid-template-columns:1fr;}
   .header-cta{font-size:12px;padding:9px 14px;}
