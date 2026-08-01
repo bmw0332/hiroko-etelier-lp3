@@ -59,6 +59,16 @@ a{color:inherit;text-decoration:none;}
 .section{padding:96px 0;position:relative;}
 
 /* ---------- Typography ---------- */
+/* 見出しの「泣き別れ」防止 */
+.hero-title,.sec-title,.gift-title,.final-title{
+  word-break:keep-all;         /* 文節の途中で改行しない（記号や句読点で不自然に割らない）*/
+  overflow-wrap:anywhere;      /* それでも収まらない長い行だけは折り返す */
+  text-wrap:balance;           /* 対応ブラウザは各行の文字数を均等化 */
+}
+.hero-title .ln,.sec-title .ln,.gift-title .ln,.final-title .ln{
+  display:inline;
+  word-break:keep-all;
+}
 .sec-title{
   font-family:var(--font-serif);
   font-weight:800;
